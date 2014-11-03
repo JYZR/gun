@@ -392,7 +392,7 @@ connect(State=#state{owner=Owner, host=Host, port=Port, type=ssl,
 	HasNPN = erlang:function_exported(ssl, negotiated_next_protocol, 1),
 	Opts = [binary, {active, false}
 		|[{client_preferred_next_protocols,
-			{client, [<<"spdy/3">>, <<"http/1.1">>], <<"http/1.1">>}}
+			{client, [<<"http/1.1">>], <<"http/1.1">>}}
 			|| HasNPN]],
 	case Transport:connect(Host, Port, Opts) of
 		{ok, Socket} ->
