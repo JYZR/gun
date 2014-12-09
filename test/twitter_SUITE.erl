@@ -51,6 +51,12 @@ end_per_suite(_) ->
 
 spdy(_) ->
 	{ok, Pid} = gun:open("twitter.com", 443),
+	receive
+		{gun_connected, Pid} ->
+			ct:print("connected")
+	after 5000 ->
+		error(timeout)
+	end,
 	Ref = gun:get(Pid, "/"),
 	receive
 		{gun_response, Pid, Ref, nofin, Status, Headers} ->

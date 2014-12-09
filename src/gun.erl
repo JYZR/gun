@@ -406,6 +406,7 @@ connect(State=#state{owner=Owner, host=Host, port=Port, type=ssl,
 					end
 			end,
 			ProtoState = Protocol:init(Owner, Socket, Transport, ProtoOpts),
+			Owner ! {gun_connected, self()},
 			before_loop(State#state{socket=Socket, transport=Transport,
 				protocol=Protocol, protocol_state=ProtoState});
 		{error, _} ->
@@ -422,6 +423,7 @@ connect(State=#state{owner=Owner, host=Host, port=Port, type=Type,
 				tcp -> {gun_http, HTTPOpts}
 			end,
 			ProtoState = Protocol:init(Owner, Socket, Transport, ProtoOpts),
+			Owner ! {gun_connected, self()},
 			before_loop(State#state{socket=Socket, transport=Transport,
 				protocol=Protocol, protocol_state=ProtoState});
 		{error, _} ->

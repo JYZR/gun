@@ -35,6 +35,13 @@ Messages
 Calling functions from this module may result in the following
 messages being sent.
 
+### {gun_connected, ServerPid}
+
+> Types:
+>  *  ServerPid = pid()
+>
+> A confirmation which is sent when the initial connection has been established
+
 ### {gun_push, ServerPid, StreamRef, AssocToStreamRef,
 	Method, Host, Path, Headers}
 
